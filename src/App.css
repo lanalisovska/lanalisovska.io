@@ -1,0 +1,9 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.rbc-calendar {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
