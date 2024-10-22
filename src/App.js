@@ -53,7 +53,7 @@ function App() {
         startAccessor="start"
         endAccessor="end"
         selectable
-        style={{ height: 500 }}
+        style={{ height: 800 }}
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}
         eventPropGetter={(event) => {
