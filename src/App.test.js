@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import '@testing-library/jest-dom';
 
-test('renders learn react link', () => {
+test('renders Calendar component', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const calendar = screen.getByRole('grid');
+  expect(calendar).toBeInTheDocument();
 });

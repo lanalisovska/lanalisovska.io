@@ -1,9 +1,120 @@
 .App {
-  font-family: sans-serif;
-  text-align: center;
+  display: flex;
 }
 
-.rbc-calendar {
-  border: 1px solid #ddd;
-  border-radius: 5px;
+.sidebar {
+  width: 300px;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  transition: width 0.3s ease;
+}
+
+.sidebar.closed {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.sidebar .toggle-btn {
+  background-color: #444;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar .menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar .menu li {
+  margin: 15px 0;
+}
+
+.sidebar .menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar .menu li a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.content.sidebar-open {
+  margin-left: 300px;
+}
+
+.content.sidebar-closed {
+  margin-left: 0;
+}
+
+.popup {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.calendar-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.calendar-page .calendar-container {
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.event-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.event-popup h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.event-popup button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.event-popup button:hover {
+  background-color: #0056b3;
 }
