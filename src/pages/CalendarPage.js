@@ -1,65 +1,44 @@
-import React, { useState } from 'react';
-import CalendarComponent from '../components/Calendar/CalendarComponent';
+import React, { useEffect, useState } from 'react';
 import './../styles/CalendarPage.css';
+import { handleEventSubmit, handleEventDelete, handleEventDrop } from './../helpers/calendarUtils'
+import CalendarComponent from '../components/Calendar/CalendarComponent';
 import EventPopup from '../components/EventPopup/EventPopup';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { ACTION_CLICK } from '../constants';
+
 
 const CalendarPage = () => {
   const [events, setEvents] = useLocalStorage('events', []);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
-  const handleEventDelete = (eventId) => {
-    const updatedEvents = events.filter(event => event.id !== eventId);
-    setEvents(updatedEvents);
-    setIsPopupVisible(false);
-    setSelectedEvent(null);
-  };
 
-  const generateEventId = () => `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+  useEffect(() => {
+    window.localStorage.setItem('events', JSON.stringify(events));
+  }, [events]);
 
-  const handleEventSubmit = (newEvent) => {
-    if (!newEvent.title || !newEvent.date || !newEvent.time || !newEvent.notes) {
-      alert("Fill all ");
-      return;
+  const adjustPopupPosition = (clientX, clientY) => {
+    const windowHeight = window.innerHeight;
+    const popupHeight = 300;
+    if (clientY + popupHeight > windowHeight) {
+      clientY = windowHeight - popupHeight - 100;
     }
-    const eventStart = new Date(`${newEvent.date}T${newEvent.time}`);
-    const eventEnd = new Date(eventStart.getTime() + 60 * 60 * 1000);
-  
-    const updatedEvents = selectedEvent
-      ? events.map((event) => 
-          event.id === selectedEvent.id 
-          ? { ...newEvent, start: eventStart, end: eventEnd, id: selectedEvent.id } 
-          : event
-        )
-      : [...events, { ...newEvent, start: eventStart, end: eventEnd, id: generateEventId() }];
-  
-    setEvents(updatedEvents);
-    setIsPopupVisible(false);
-    setSelectedEvent(null);
+    setPopupPosition({ x: clientX, y: clientY });
+    setIsPopupVisible(true);
   };
-  
-  
+
   const handleSelectSlot = (slotInfo) => {
     const { action } = slotInfo;
-    if (action === 'click') {
+    if (action ===  ACTION_CLICK) {
       setSelectedEvent(null);
-      setPopupPosition({
-        x: slotInfo?.box?.clientX,
-        y: slotInfo?.box?.clientY,
-      });
-      setIsPopupVisible(true);
+      let { clientX, clientY } = slotInfo?.box || {};
+      adjustPopupPosition(clientX, clientY);
     }
   };
 
   const handleSelectEvent = (event, { clientX, clientY }) => {
-    console.log(event);
     setSelectedEvent(event);
-    setPopupPosition({
-      x: clientX,
-      y: clientY,
-    });
-    setIsPopupVisible(true);
+    adjustPopupPosition(clientX, clientY);
   };
 
   const handleCancel = () => {
@@ -67,31 +46,20 @@ const CalendarPage = () => {
     setSelectedEvent(null);
   };
 
-  const handleEventDrop = ({ event, start, end }) => {
-    console.log({ event, start, end })
-    const updatedEvent = { ...event, start, end };
-  
-    const updatedEvents = events.map((existingEvent) =>
-      existingEvent.id === event.id ? updatedEvent : existingEvent
-    );
-  
-    setEvents(updatedEvents);
-  };
-
   return (
     <div className="calendarPage">
       <h1>Calendar</h1>
       <CalendarComponent
         events={events}
-        handleEventDrop={handleEventDrop}
+        handleEventDrop={(dropInfo) => handleEventDrop(events, dropInfo.event, dropInfo.start, dropInfo.end, setEvents)}
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleSelectEvent}
       />
       {isPopupVisible && (
         <EventPopup
           event={selectedEvent}
-          onSubmit={handleEventSubmit}
-          onDelete={() => handleEventDelete(selectedEvent.id)}
+          onSubmit={(newEvent) => handleEventSubmit(events, newEvent, selectedEvent, setEvents, setIsPopupVisible)}
+          onDelete={() => handleEventDelete(events, selectedEvent.id, setEvents, setIsPopupVisible, setSelectedEvent)}
           onCancel={handleCancel}
           style={{ top: `${popupPosition.y}px`, left: `${popupPosition.x}px`, position: 'absolute' }}
         />

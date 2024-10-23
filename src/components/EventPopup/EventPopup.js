@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './EventPopup.css';
-
-export const CLASSIC_COLORS = [
-  { name: 'Soft Red', value: '#F8C8C8' },
-  { name: 'Soft Green', value: '#B8EBD0' },
-  { name: 'Soft Blue', value: '#A4C8E1' },
-  { name: 'Soft Yellow', value: '#F9EBAF' },
-  { name: 'Soft Purple', value: '#B3B5D8' },
-];
+import { CLASSIC_COLORS } from '../../constants';
 
 const EventPopup = ({ event, onSubmit, onCancel, style, onDelete }) => {
   const [title, setTitle] = useState('');
@@ -15,6 +8,7 @@ const EventPopup = ({ event, onSubmit, onCancel, style, onDelete }) => {
   const [time, setTime] = useState('');
   const [notes, setNotes] = useState('');
   const [color, setColor] = useState('#FF0000');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (event) {
@@ -28,14 +22,15 @@ const EventPopup = ({ event, onSubmit, onCancel, style, onDelete }) => {
       setDate('');
       setTime('');
       setNotes('');
-      setColor('#FF0000'); // Default to red
+      setColor('#FF0000');
     }
   }, [event]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');
     if (!title || !date || !time || !notes) {
-      alert("Всі поля повинні бути заповнені!");
+      setError("All fields must be filled in!");
       return;
     }
     onSubmit({ title, date, time, notes, color });
@@ -51,7 +46,7 @@ const EventPopup = ({ event, onSubmit, onCancel, style, onDelete }) => {
         <input
           type="text"
           value={title}
-          placeholder="Назва події"
+          placeholder="Event Title"
           onChange={(e) => setTitle(e.target.value)}
           className="popup-input"
         />
@@ -71,12 +66,15 @@ const EventPopup = ({ event, onSubmit, onCancel, style, onDelete }) => {
         </div>
         <textarea
           value={notes}
-          placeholder="Додаткові нотатки"
+          placeholder="Additional Notes"
           onChange={(e) => setNotes(e.target.value)}
           className="popup-input notes-input"
         />
+        <div className="error-message" style={{ opacity: error ? 1 : 0, transition: 'opacity 0.3s ease' }}>
+          {error}
+        </div>
         <div className="color-selection">
-          <h4>Виберіть колір:</h4>
+          <h4>Select Color:</h4>
           <div className="color-options">
             {CLASSIC_COLORS.map((colorOption) => (
               <div
@@ -84,7 +82,7 @@ const EventPopup = ({ event, onSubmit, onCancel, style, onDelete }) => {
                 className="color-circle"
                 style={{
                   backgroundColor: colorOption.value,
-                  border: color === colorOption.value ? '2px solid black' : 'none', // Обране коло виділено
+                  border: color === colorOption.value ? '2px solid black' : `2px solid ${colorOption.value}`,
                 }}
                 onClick={() => setColor(colorOption.value)}
               />
@@ -92,10 +90,10 @@ const EventPopup = ({ event, onSubmit, onCancel, style, onDelete }) => {
           </div>
         </div>
         <div className="popup-actions">
-          <button type="button" className="discard-btn" onClick={onCancel}>Скасувати</button>
-          <button type="submit" className="save-btn">Зберегти</button>
+          <button type="button" className="discard-btn" onClick={onCancel}>Cancel</button>
+          <button type="submit" className="save-btn">Save</button>
           {event && (
-         <button type="button" className="delete-btn" onClick={onDelete}>Видалити</button>
+            <button type="button" className="delete-btn" onClick={onDelete}>Delete</button>
           )}
         </div>
       </form>

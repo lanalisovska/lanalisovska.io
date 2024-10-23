@@ -10,81 +10,67 @@
   --red: #FF5F5F;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 .App {
-  display: flex;
+    display: flex;
+    height: 100vh; /* Full viewport height */
 }
 
 .sidebar {
-  width: 300px;
-  background-color: var(--dark-gray); /* Використання змінної кольору */
-  color: var(--white); /* Використання змінної кольору */
-  padding: 10px;
-  transition: width 0.3s ease;
-}
-
-.sidebar.closed {
-  width: 0;
-  padding: 0;
-  overflow: hidden;
+    width: 300px;
+    background-color: var(--dark-gray);
+    color: var(--white);
+    padding: 10px;
+    transition: width 0.3s ease;
 }
 
 .sidebar .toggle-btn {
-  background-color: var(--semi-transparent-gray);
-  color: var(--white);
-  padding: 10px;
-  border: none;
-  cursor: pointer;
+    background-color: var(--semi-transparent-gray);
+    color: var(--white);
+    padding: 10px;
+    border: none;
+    cursor: pointer;
 }
 
 .sidebar .menu {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 .sidebar .menu li {
-  margin: 15px 0;
+    margin: 15px 0;
 }
 
 .sidebar .menu li a {
-  color: var(--white);
-  text-decoration: none;
+    color: var(--white);
+    text-decoration: none;
 }
 
 .sidebar .menu li a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure full height */
+}
+
+.header {
+    background-color: var(--light-gray);
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .content {
-  flex-grow: 1;
-  padding: 20px;
-  transition: margin-left 0.3s ease;
-}
-
-.content.sidebar-closed {
-  margin-left: 0;
-}
-
-.calendar-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: var(--white);
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px var(--shadow-gray);
-}
-
-.calendar-title {
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
-  color: var(--dark-gray);
-}
-
-.calendar-page .calendar-container {
-  border-radius: 12px;
-  box-shadow: 0px 4px 8px var(--shadow-gray);
-  overflow: hidden;
-  background-color: var(--white);
-  padding: 20px;
+    padding: 30px 50px 0 50px;
+    background-color: var(--light-gray);
+    box-shadow: 0px 4px 10px var(--shadow-gray);
+    flex-grow: 1; /* Allow it to grow */
+    overflow: auto; /* Handle overflow */
 }

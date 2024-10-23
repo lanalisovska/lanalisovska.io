@@ -1,0 +1,20 @@
+.rbc-header {
+    height: 50px;
+    font-size: 1.2em;
+    background-color: #f0f0f0;
+    color: #333;
+}
+  
+.rbc-calendar {
+    padding: 30px 10px 0 10px;
+    border-radius: 5px;
+  }
+  
+.rbc-event {
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.rbc-day-slot {
+    min-height: 80px;
+}
