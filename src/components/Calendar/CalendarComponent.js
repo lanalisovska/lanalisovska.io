@@ -6,16 +6,25 @@ import './Calendar.css'
 
 const localizer = momentLocalizer(moment);
 
-const CalendarComponent = ({ events, onEventDrop, onSelectSlot, onSelectEvent, onDeleteEvent }) => {
+const CalendarComponent = ({ events, handleEventDrop, onSelectSlot, onSelectEvent, onDeleteEvent }) => {
+  const updatedEvents = events.map(({ start, end, ...rest }) => ({
+    start: new Date(Date.parse(start)),
+    end: new Date(Date.parse(end)),
+    ...rest,
+  }));
+
   return (
     <Calendar
       localizer={localizer}
-      events={events}
+      events={updatedEvents}
       startAccessor="start"
       endAccessor="end"
       selectable
       resizable
-      onEventDrop={onEventDrop}
+      showMultiDayTimes={true}
+      draggableAccessor={(event) => true} 
+      onEventDrop={handleEventDrop}
+      onDeleteEvent={onDeleteEvent}
       onSelectSlot={onSelectSlot}
       onSelectEvent={onSelectEvent}
       eventPropGetter={(event) => {

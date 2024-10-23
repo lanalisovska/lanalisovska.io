@@ -1,0 +1,132 @@
+.popup {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 20px;
+  position: absolute;
+  z-index: 1000;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-header h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.popup-form {
+  margin-top: 15px;
+}
+
+.popup-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.date-time-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-input, .time-input {
+  width: 48%;
+}
+
+.notes-input {
+  font-style: italic;
+  color: gray;
+}
+
+.popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+.discard-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.discard-btn:hover {
+  background-color: #5a6268;
+}
+
+.delete-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+}
+
+.color-selection {
+  margin: 10px 0;
+}
+
+.color-options {
+  display: flex;
+  gap: 10px;
+}
+
+.color-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s;
+}
+
+.color-circle:hover {
+  border: 2px solid #666;
+}

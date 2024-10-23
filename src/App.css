@@ -1,11 +1,23 @@
+:root {
+  --light-gray: #F0F0F7;
+  --white: #FFFFFF;
+  --dark-gray: #43425D;
+  --shadow-gray: #00000029;
+  --light-purple: #A5A4BF;
+  --semi-transparent-gray: #43425D80;
+  --medium-gray: #D6D6D6;
+  --purple: #6A6996;
+  --red: #FF5F5F;
+}
+
 .App {
   display: flex;
 }
 
 .sidebar {
   width: 300px;
-  background-color: #333;
-  color: white;
+  background-color: var(--dark-gray); /* Використання змінної кольору */
+  color: var(--white); /* Використання змінної кольору */
   padding: 10px;
   transition: width 0.3s ease;
 }
@@ -17,8 +29,8 @@
 }
 
 .sidebar .toggle-btn {
-  background-color: #444;
-  color: white;
+  background-color: var(--semi-transparent-gray);
+  color: var(--white);
   padding: 10px;
   border: none;
   cursor: pointer;
@@ -34,7 +46,7 @@
 }
 
 .sidebar .menu li a {
-  color: white;
+  color: var(--white);
   text-decoration: none;
 }
 
@@ -48,29 +60,17 @@
   transition: margin-left 0.3s ease;
 }
 
-.content.sidebar-open {
-  margin-left: 300px;
-}
-
 .content.sidebar-closed {
   margin-left: 0;
 }
 
-.popup {
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
 .calendar-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: var(--white);
   border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px var(--shadow-gray);
 }
 
 .calendar-title {
@@ -78,43 +78,13 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--dark-gray);
 }
 
 .calendar-page .calendar-container {
   border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px var(--shadow-gray);
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--white);
   padding: 20px;
-}
-
-.event-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}
-
-.event-popup h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.event-popup button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.event-popup button:hover {
-  background-color: #0056b3;
 }
