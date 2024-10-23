@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
 import CalendarPage from './pages/CalendarPage';
 import AnotherPage from './pages/AnotherPage';
 import './App.css';
 import UserPage from './pages/UserPage';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar';
+import HomePage from './pages/HomePage';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -14,8 +14,16 @@ function App() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const routes = [
+    { path: '/', element: <CalendarPage />},
+    { path: '/homepage', element: <HomePage />},
+    { path: '/inbox', element: <AnotherPage /> },
+    { path: '/invoice', element: <AnotherPage /> },
+    { path: '/user', element: <UserPage /> },
+  ];
+
   return (
-    <Router>
+    <Router basename="lanalisovska.io">
       <div className="App">
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         
@@ -23,14 +31,17 @@ function App() {
           <Header />
           <div className='content'>
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/calendar" element={<CalendarPage />} />
-              <Route path="/another" element={<AnotherPage />} />
-              <Route path="/user" element={<UserPage />} />
+              {routes.map((route, index) => (
+                <Route 
+                  key={index} 
+                  path={route.path} 
+                  element={route.element} 
+                />
+              ))}
             </Routes>
           </div>
         </div>
-      </div>
+      </div> 
     </Router>
   );
 }
