@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CalendarPage from './pages/CalendarPage';
 import AnotherPage from './pages/AnotherPage';
-import Sidebar from './components/Sidebar';
 import './App.css';
 import UserPage from './pages/UserPage';
 import Header from './components/Header/Header';
+import Sidebar from './components/SideBar';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
