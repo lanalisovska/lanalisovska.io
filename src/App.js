@@ -6,7 +6,7 @@ import AnotherPage from './pages/AnotherPage';
 import './App.css';
 import UserPage from './pages/UserPage';
 import Header from './components/Header/Header';
-import Sidebar from './components/SideBar';
+import Sidebar from './components/Sidebar';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
