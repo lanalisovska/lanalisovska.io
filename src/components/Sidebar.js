@@ -9,6 +9,7 @@ const Sidebar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/calendar">Calendar</Link></li>
         <li><Link to="/another">Another Page</Link></li>
+        <li><Link to="/another">Another Page</Link></li>
       </ul>
     </div>
   );
